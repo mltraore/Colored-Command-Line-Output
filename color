@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+import math
+from argparse import ArgumentParser
+from colors import colors
+
+parser = ArgumentParser()
+parser.add_argument("color",type=str)
+arg = parser.parse_args()
+
+def rgb(x):
+    try:
+        r,g,b = colors[x.capitalize()]
+    except KeyError:
+        r,g,b = colors["Black"]
+    return r,g,b
+
+r,g,b = rgb(arg.color)
+
+while True :
+    try :       
+        line = input()
+        for i in range(len(line)) :
+            print("\033[38;2;%d;%d;%dm%c\033[0m"%(r, g, b, line[i]), end = '')
+
+        print()     
+
+    except EOFError :
+        break
